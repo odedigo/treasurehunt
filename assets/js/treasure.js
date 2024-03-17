@@ -1,3 +1,13 @@
+/**
+ * treasure.js
+ * 
+ * This file includes functions that handle the game's logic
+ * 
+ * Written by: Oded Cnaan
+ * Date: March 2024
+ */
+
+// Globals
 let riddles = {}
 let team = ""
 let rindex = ""
@@ -5,20 +15,30 @@ let debugMode = false
 let deltaAngle = 5;
 let deltaSize = 5;
 
+/**
+ * Prints data only if in debug mode
+ * @param {*} msg 
+ */
 function debugLog(msg) {
     if (debugMode) 
         for (var i=0; i<arguments.length; i++) console.log(arguments[i]);
 }
 
+/**
+ * Event handler - page loaded
+ */
 window.addEventListener('load', () => {
+    // Validate URL params.
+    // 2 params are required: team (red/green/blue) and index (1 to 5)
     team = getParameterValues('team')
     rindex = getParameterValues('index')
     if (!isValidParams(team,rindex)) {
-        window.location = "err.html"
+        window.location = "err.html" // redirect to an error page
         return;
     }
-    loadRiddles();
+    loadRiddles(); // Load the riddle data from Json file
 
+    // Register for form submission events (checking vector correctness)
     let el = findElement("checkForm")
     el.addEventListener("submit", function(e){
         checkVector(this)
@@ -71,11 +91,12 @@ function loadRiddles() {
  * Populate page data based on URL params and riddles json
  */
 function populateData() {
-    let data = riddles[team];
+    let data = riddles[team]; // this team's data
 
     debugLog(team,rindex)
     debugLog(data)    
 
+    // Colors
     var el = findElement('teamColor');
     el.innerHTML = data.team;
     el.style.color = data.color;
@@ -83,12 +104,14 @@ function populateData() {
     el = findElement('aboutContainer');
     el.style.backgroundColor = data.bgColor;
 
+    // Form hidden fields
     el = findElement('team');
     el.value = team
 
     el = findElement('rIndex');
     el.value = rindex
     
+    // Riddle related texts
     el = findElement('theRiddle');
     el.innerHTML = generateRiddleHtml(data)
 
@@ -97,6 +120,11 @@ function populateData() {
 
 }
 
+/**
+ * Validates if the queried vector (size and angle) are correct
+ * @param {*} form 
+ * @returns 
+ */
 function checkVector(form) {
     clearMsgs();
     var data = riddles[team];
@@ -105,6 +133,7 @@ function checkVector(form) {
     var vs = form.vectorSize.value
     var va = form.vectorAngle.value
 
+    // Form fields cannot be empty
     if (vs === "" || va === "") {
         var el = findElement("errorMsg")
         el.innerHTML = "יש למלא את גודל הוקטור והזווית"
@@ -113,21 +142,25 @@ function checkVector(form) {
         return false;
     }
 
-    // json data
+    // filter the riddle in the given index
     const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )[0]
     var i = 0
 
-    var success = -1;
+    var success = -1; // may be -1 (error), 0 (success of a single vector) or 1-5 (success of multiple vectors)
     if (rdl.vecSize.length == 1) {
+        // single vector 
         success = checkAnswer(vs, va, rdl.vecSize[0], rdl.vecAngle[0], 1) ? 0 : -1
     }
     else {        
+        // multiple vectors in this riddle
         for (; i < rdl.vecSize.length; i++) {
             if (checkAnswer(vs,va,  rdl.vecSize[i], rdl.vecAngle[i], i+1)) {
-                success = i+1
+                success = i+1 // mark the index of this vector in the array
             }
         }
     }
+
+    // Add message on the page
     el = findElement("instructions")
     if (success == -1) {
         el.innerHTML = "זה לא הוקטור הנכון. חשבו שנית..."
@@ -144,6 +177,15 @@ function checkVector(form) {
     return success;
 }
 
+/**
+ * Checks if the angle and size in the form match those in the json for this riddle
+ * @param {*} formSize 
+ * @param {*} formAngle 
+ * @param {*} jsonSize 
+ * @param {*} jsonAngle 
+ * @param {*} index 
+ * @returns 
+ */
 function checkAnswer(formSize, formAngle, jsonSize, jsonAngle, index) {
     if(Math.abs(formSize - jsonSize) > deltaSize || Math.abs(formAngle - jsonAngle) > deltaAngle) {
         return false;
@@ -151,6 +193,9 @@ function checkAnswer(formSize, formAngle, jsonSize, jsonAngle, index) {
     return true
 }
   
+/**
+ * Clears the message from page labels
+ */
 function clearMsgs() {
     var el = findElement("errorMsg")
     el.innerHTML = ""
@@ -158,6 +203,11 @@ function clearMsgs() {
     el.innerHTML = ""
 }
 
+/**
+ * Generates the HTML of the riddle itself
+ * @param {*} data 
+ * @returns 
+ */
 function generateRiddleHtml(data) {
     const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )[0]
     var str = `<p class="fst-italic">

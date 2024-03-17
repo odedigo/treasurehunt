@@ -1,9 +1,11 @@
 /**
-* Template Name: Scaffold
-* Template URL: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+ * main.js
+ * 
+ * Written by: Oded Cnaan
+ * Date: March 2024
+ * 
+ * Template Name: Scaffold
+ */
 
 /**
  * Easy selector helper function
@@ -17,6 +19,11 @@ const select = (el, all = false) => {
   }
 }
 
+/**
+ * Simple selector by id
+ * @param {*} el 
+ * @returns 
+ */
 const findElement = (el) => {
   return document.getElementById(el)
 }
