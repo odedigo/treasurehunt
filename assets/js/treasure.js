@@ -1,6 +1,6 @@
 let riddles = {}
 let team = ""
-let index = ""
+let rindex = ""
 let debugMode = true
 
 function debugLog(msg) {
@@ -10,12 +10,18 @@ function debugLog(msg) {
 
 window.addEventListener('load', () => {
     team = getParameterValues('team')
-    index = getParameterValues('index')
-    if (!isValidParams(team,index)) {
-        window.location = "err.html"
+    rindex = getParameterValues('index')
+    if (!isValidParams(team,rindex)) {
+        //window.location = "err.html"
         return;
     }
     loadRiddles();
+
+    let el = findElement("checkForm")
+    el.addEventListener("submit", function(e){
+        checkVector(this)
+        e.preventDefault();    //stop form from submitting
+    });
 });
 
 /**
@@ -65,7 +71,7 @@ function loadRiddles() {
 function populateData() {
     let data = riddles[team];
 
-    debugLog(team,index)
+    debugLog(team,rindex)
     debugLog(data)    
 
     let el = findElement('teamColor');
@@ -74,5 +80,24 @@ function populateData() {
 
     el = findElement('aboutContainer');
     el.style.backgroundColor = data.bgColor;
+
+    el = findElement('team');
+    el.value = team
+
+    el = findElement('rIndex');
+    el.value = rindex
 }
 
+function checkVector(form) {
+    let data = riddles[team];
+
+    /*console.log("index",form.rIndex.value)
+    console.log("team",form.team.value)
+    console.log("size",form.vectorSize.value)
+    console.log("angle",form.vectorAngle.value)*/
+
+    const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )
+    console.log(rdl.vecSize)
+    console.log(rdl.vecAngle)
+}
+  

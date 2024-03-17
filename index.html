@@ -142,21 +142,21 @@
           <div class="col-lg-5 text-center text-lg-start">
             <h3>בידקו אם הוקטור שקיבלתם נכון</h3>
             <div class="checker">
-              <form id="check_blue" action="#">
-                <input type="hidden" value="1" id="riddleIndex"/>
-                <input type="hidden" value="red" id="teamColor"/>
+              <form id="checkForm" action="#">
+                <input type="hidden" value="" id="rIndex"/>
+                <input type="hidden" value="" id="team"/>
                 <div class="form-group">
-                  <label for="vector_size_b">כיתבו את גודל הוקטור שקיבלתם:</label>
-                  <input type="number" class="form-control" id="vector_size_b" placeholder="גודל הוקטור...">
+                  <label for="vectorSize">כיתבו את גודל הוקטור שקיבלתם:</label>
+                  <input type="number" class="form-control" id="vectorSize" placeholder="גודל הוקטור...">
                 </div>
                 <div class="form-group">
-                  <label for="vector_angle_b">כיתבו את הזווית שקיבלתם:</label>
-                  <input type="number" class="form-control" id="vector_angle_b" placeholder="כיוון הוקטור...">
+                  <label for="vectorAngle">כיתבו את הזווית שקיבלתם:</label>
+                  <input type="number" class="form-control" id="vectorAngle" placeholder="כיוון הוקטור...">
                 </div>
                 <br/>
                 <div class="form-group">
                   <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#">בדיקה</a>
+                    <button type="submit" class="cta-btn align-middle" id="checker">בדיקה</button>
                   </div>
                 </div>
               </form>
