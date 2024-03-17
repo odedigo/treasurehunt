@@ -172,7 +172,7 @@ function generateRiddleHtml(data) {
     }
       
     str += `</ul>
-    <p>
+    <p class="final-inst">
       ${rdl.riddle[i]}
     </p>`
 
