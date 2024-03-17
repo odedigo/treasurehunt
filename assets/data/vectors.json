@@ -4,6 +4,7 @@
     "blue": {
         "team": "הקבוצה הכחולה",
         "color": "#4f81bd",
+        "bgColor": "#94c4ff",
         "riddles": [
             {
                 "index": 1,
@@ -55,6 +56,7 @@
     "green": {
         "team": "הקבוצה הירוקה",
         "color": "#9bba59",
+        "bgColor": "#96dd89",
         "riddles": [
             {
                 "index": 1,
@@ -106,6 +108,7 @@
     "red": {
         "team": "הקבוצה האדומה",
         "color": "#c0514d",
+        "bgColor": "#ff8f9a",
         "riddles": [
             {
                 "index": 1,

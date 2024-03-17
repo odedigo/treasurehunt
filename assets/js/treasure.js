@@ -1,6 +1,12 @@
 let riddles = {}
 let team = ""
 let index = ""
+let debugMode = true
+
+function debugLog(msg) {
+    if (debugMode) 
+        for (var i=0; i<arguments.length; i++) console.log(arguments[i]);
+}
 
 window.addEventListener('load', () => {
     team = getParameterValues('team')
@@ -58,10 +64,15 @@ function loadRiddles() {
  */
 function populateData() {
     let data = riddles[team];
-    console.log(data)
 
-    let tc = findElement('teamColor');
-    tc.innerHTML = data.team;
-    console.log(team, index)
+    debugLog(team,index)
+    debugLog(data)    
+
+    let el = findElement('teamColor');
+    el.innerHTML = data.team;
+    el.style.color = data.color;
+
+    el = findElement('aboutContainer');
+    el.style.backgroundColor = data.bgColor;
 }
 
