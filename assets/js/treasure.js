@@ -1,7 +1,9 @@
 let riddles = {}
 let team = ""
 let rindex = ""
-let debugMode = true
+let debugMode = false
+let deltaAngle = 5;
+let deltaSize = 5;
 
 function debugLog(msg) {
     if (debugMode) 
@@ -74,7 +76,7 @@ function populateData() {
     debugLog(team,rindex)
     debugLog(data)    
 
-    let el = findElement('teamColor');
+    var el = findElement('teamColor');
     el.innerHTML = data.team;
     el.style.color = data.color;
 
@@ -86,18 +88,96 @@ function populateData() {
 
     el = findElement('rIndex');
     el.value = rindex
+    
+    el = findElement('theRiddle');
+    el.innerHTML = generateRiddleHtml(data)
+
+    el = findElement('riddleIndex');
+    el.innerHTML = rindex
+
 }
 
 function checkVector(form) {
-    let data = riddles[team];
+    clearMsgs();
+    var data = riddles[team];
 
-    /*console.log("index",form.rIndex.value)
-    console.log("team",form.team.value)
-    console.log("size",form.vectorSize.value)
-    console.log("angle",form.vectorAngle.value)*/
+    // form data
+    var vs = form.vectorSize.value
+    var va = form.vectorAngle.value
 
-    const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )
-    console.log(rdl.vecSize)
-    console.log(rdl.vecAngle)
+    if (vs === "" || va === "") {
+        var el = findElement("errorMsg")
+        el.innerHTML = "יש למלא את גודל הוקטור והזווית"
+        el = findElement("instructions")
+        el.innerHTML = ""
+        return false;
+    }
+
+    // json data
+    const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )[0]
+    var i = 0
+
+    var success = -1;
+    if (rdl.vecSize.length == 1) {
+        success = checkAnswer(vs, va, rdl.vecSize[0], rdl.vecAngle[0], 1) ? 0 : -1
+    }
+    else {        
+        for (; i < rdl.vecSize.length; i++) {
+            if (checkAnswer(vs,va,  rdl.vecSize[i], rdl.vecAngle[i], i+1)) {
+                success = i+1
+            }
+        }
+    }
+    el = findElement("instructions")
+    if (success == -1) {
+        el.innerHTML = "זה לא הוקטור הנכון. חשבו שנית..."
+    }
+    else {
+        var num = 0
+        el.innerHTML = "<p>מצאתם את הוקטור הנכון!</p>"
+        if (success > 0) {
+            num = success-1
+            el.innerHTML += `<p>שימו לב שזהו הוקטור ה ${success} ברשימה מתוך ${rdl.vecSize.length}</p>`
+        }
+        el.innerHTML += `<p class='vector' style="color:${data.color}"> (${rdl.vecSize[num]}m, ${rdl.vecAngle[num]}°)</p>`
+    }
+    return success;
+}
+
+function checkAnswer(formSize, formAngle, jsonSize, jsonAngle, index) {
+    if(Math.abs(formSize - jsonSize) > deltaSize || Math.abs(formAngle - jsonAngle) > deltaAngle) {
+        return false;
+    }
+    return true
 }
   
+function clearMsgs() {
+    var el = findElement("errorMsg")
+    el.innerHTML = ""
+    el = findElement("instructions")
+    el.innerHTML = ""
+}
+
+function generateRiddleHtml(data) {
+    const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )[0]
+    console.log(rdl)
+    var str = `<p class="fst-italic">
+      ${rdl.riddle[0]}
+    </p>
+    <ul>`;
+
+    var i=1
+    for (; i < rdl.riddle.length - 2 ; i++) {
+            str += `<li><i class="bi bi-check-circle"> ${rdl.riddle[i]}</i></li>`;
+    }
+      
+    `</ul>
+    <p>
+      ${rdl.riddle[rdl.riddle.length-1]}
+    </p>`
+
+    el = findElement("riddleImg")
+    console.log(el)
+    el.src = `https://github.com/odedigo/treasurehunt/assets/img/th/${rdl.img}`
+    return str;
+}

@@ -111,22 +111,12 @@
 
         <div class="row">
           <div class="col-lg-6" data-aos="zoom-in">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <img src="assets/img/about.jpg" class="img-fluid" alt="" id="riddleImg">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-contents-center" data-aos="fade-left">
             <div class="content pt-4 pt-lg-0">
               <h3>חידה מספר <label id="riddleIndex"></label></h3>
-              <p class="fst-italic">
-                חידת פתיחה:
-              </p>
-              <ul>
-                <li><i class="bi bi-check-circle"></i> הזווית של הוקטור הזה היא 10 מעלות מתחת כיוון החיובי של  ציר X</li>
-                <li><i class="bi bi-check-circle"></i> כדי לחשב את אורכו, חשבו את הגובה של הבניין שצריך להפיל ממנו אבן כדי שיקח לה 4.07 שניות להגיע לקרקע</li>
-                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperd</li>
-              </ul>
-              <p>
-                החידה השנייה מחכה בקצה הוקטור שקיבלתם
-              </p>
+              <div id="theRiddle"></div>
             </div>
           </div>
         </div>
@@ -147,11 +137,11 @@
                 <input type="hidden" value="" id="team"/>
                 <div class="form-group">
                   <label for="vectorSize">כיתבו את גודל הוקטור שקיבלתם:</label>
-                  <input type="number" class="form-control" id="vectorSize" placeholder="גודל הוקטור...">
+                  <input value="135" type="number" class="form-control" id="vectorSize" placeholder="גודל הוקטור...">
                 </div>
                 <div class="form-group">
                   <label for="vectorAngle">כיתבו את הזווית שקיבלתם:</label>
-                  <input type="number" class="form-control" id="vectorAngle" placeholder="כיוון הוקטור...">
+                  <input value="285" type="number" class="form-control" id="vectorAngle" placeholder="כיוון הוקטור...">
                 </div>
                 <br/>
                 <div class="form-group">
@@ -165,8 +155,8 @@
           
           <div class="col-lg-5 text-center text-lg-start">
             <h3>&nbsp;</h3>
-            <p><label id="errorMsg" class="errorMsg">בעיה בקריאת הנתונים. נסו שוב מאוחר יותר</label></p>
-            <p><label id="instructions" class="instructions">הוקטור שמצאתם נכון - התקדמו</label></p>
+            <p><label id="errorMsg" class="errorMsg"></label></p>
+            <p><label id="instructions" class="instructions"></label></p>
           </div>
         </div>
 

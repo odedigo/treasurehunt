@@ -64,6 +64,10 @@ input {
   font-weight: bold;
 }
 
+.vector {
+  font-size: 30px;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -527,7 +531,7 @@ section {
 .about .content ul i {
   font-size: 20px;
   padding-right: 4px;
-  color: #28a745;
+  color: #212529;
 }
 
 .about .content p:last-child {
