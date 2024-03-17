@@ -3,6 +3,7 @@
     "date": "16.3.2024",
     "blue": {
         "team": "הקבוצה הכחולה",
+        "color": "#4f81bd",
         "riddles": [
             {
                 "index": 1,
@@ -53,6 +54,7 @@
     },
     "green": {
         "team": "הקבוצה הירוקה",
+        "color": "#9bba59",
         "riddles": [
             {
                 "index": 1,
@@ -103,6 +105,7 @@
     },
     "red": {
         "team": "הקבוצה האדומה",
+        "color": "#c0514d",
         "riddles": [
             {
                 "index": 1,

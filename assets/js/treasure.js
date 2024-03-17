@@ -45,7 +45,7 @@ function isValidParams(team,index) {
  * Loads the riddles' json
  */
 function loadRiddles() {
-    fetch("https://odedigo.github.io/treasure/assets/data/vectors.json")
+    fetch("https://odedigo.github.io/treasurehunt/assets/data/vectors.json")
     .then((response) => response.json())
     .then((json) => {
         riddles = json
@@ -58,6 +58,7 @@ function loadRiddles() {
  */
 function populateData() {
     let data = riddles[team];
+    console.log(data)
 
     let tc = findElement('teamColor');
     tc.innerHTML = data.team;
