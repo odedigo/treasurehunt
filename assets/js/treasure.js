@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
     team = getParameterValues('team')
     rindex = getParameterValues('index')
     if (!isValidParams(team,rindex)) {
-        //window.location = "err.html"
+        window.location = "err.html"
         return;
     }
     loadRiddles();
@@ -167,17 +167,16 @@ function generateRiddleHtml(data) {
     <ul>`;
 
     var i=1
-    for (; i < rdl.riddle.length - 2 ; i++) {
+    for (; i < rdl.riddle.length -1 ; i++) {
             str += `<li><i class="bi bi-check-circle"> ${rdl.riddle[i]}</i></li>`;
     }
       
-    `</ul>
+    str += `</ul>
     <p>
-      ${rdl.riddle[rdl.riddle.length-1]}
+      ${rdl.riddle[i]}
     </p>`
 
     el = findElement("riddleImg")
-    console.log(el)
-    el.src = `https://github.com/odedigo/treasurehunt/assets/img/th/${rdl.img}`
+    el.src = `assets/img/rdl/${rdl.img}`
     return str;
 }
