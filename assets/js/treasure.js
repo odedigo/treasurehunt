@@ -160,7 +160,6 @@ function clearMsgs() {
 
 function generateRiddleHtml(data) {
     const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )[0]
-    console.log(rdl)
     var str = `<p class="fst-italic">
       ${rdl.riddle[0]}
     </p>
