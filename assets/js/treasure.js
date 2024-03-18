@@ -25,7 +25,7 @@ function debugLog(msg) {
         for (var i=0; i<arguments.length; i++) console.log(arguments[i]);
 }
 
-
+ 
 /**
  * gets a param from the URL
  * @param {*} param 
