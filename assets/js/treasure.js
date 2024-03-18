@@ -150,7 +150,7 @@ function checkVector(form) {
     // Form fields cannot be empty
     if (vs === "" || va === "") {
         var el = findElement("errorMsg")
-        el.innerHTML = "יש למלא את גודל הוקטור והזווית"
+        el.innerHTML = strings.js.formEmpty
         el = findElement("instructions")
         el.innerHTML = ""
         return false;
@@ -177,16 +177,16 @@ function checkVector(form) {
     // Add message on the page
     el = findElement("instructions")
     if (success == -1) {
-        el.innerHTML = "זה לא הוקטור הנכון. חשבו שנית..."
+        el.innerHTML = strings.js.badVector
     }
     else {
         var num = 0
-        el.innerHTML = "<p>מצאתם את הוקטור הנכון!</p>"
+        el.innerHTML = strings.js.goodVector
         if (success > 0) {
             num = success-1
-            el.innerHTML += `<p>שימו לב שזהו הוקטור ה ${success} ברשימה מתוך ${rdl.vecSize.length}</p>`
+            el.innerHTML += strings.js.vectorInfo //`<p>שימו לב שזהו הוקטור ה ${success} ברשימה מתוך ${rdl.vecSize.length}</p>`
         }
-        el.innerHTML += `<p class='vector' style="color:${data.color}"> (${rdl.vecSize[num]}m, ${rdl.vecAngle[num]}°)</p>`
+        el.innerHTML += strings.js.riddleLine //`<p class='vector' style="color:${data.color}"> (${rdl.vecSize[num]}m, ${rdl.vecAngle[num]}°)</p>`
     }
     return success;
 }
