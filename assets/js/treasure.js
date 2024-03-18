@@ -29,6 +29,7 @@ function debugLog(msg) {
  * Event handler - page loaded
  */
 window.addEventListener('load', () => {
+    updateTeamStatus()
     // Validate URL params.
     // 2 params are required: team (red/green/blue) and index (1 to 5)
     team = getParameterValues('team')
@@ -246,4 +247,39 @@ function generateRiddleHtml(data) {
     el = findElement("riddleImg")
     el.src = `assets/img/rdl/${rdl.img}`
     return str;
+}
+
+async function updateTeamStatus() {
+    let _id = "65f7db30ce61ed8986782f66"
+    if (team == 'red') {
+        _id = "65f7dadfce61ed8986782f64"
+    }    
+    else if (team == 'green') {
+        _id = "65f7db26ce61ed8986782f65"
+    }
+    const response = await fetch('https://eu-central-1.aws.data.mongodb-api.com/app/data-ffvzc/endpoint/data/v1/action/updateOne', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Access-Control-Request-Headers': '*',
+        'api-key': 'NmEFsBslI3f1pOIE7dcEX62esJwx2j9ME61TL2Z2KNAX8fDoEdLdWWIiqtJJfOg8',
+        },
+        body: {            
+            "collection":"gameStatus",
+            "database":"treasurehunt",
+            "dataSource":"ClusterMashar",
+            "filter": {
+                "_id": { "$oid": _id }
+            },
+            "update": {
+                "$set": {
+                    "riddle": rindex
+                }
+            }            
+        }
+    });
+    const myJson = await response.json(); //extract JSON from the http response
+    // do something with myJson
+    console.log(myJson)
 }
