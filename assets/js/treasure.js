@@ -51,7 +51,7 @@ window.addEventListener('load', () => {
 /**
  * gets a param from the URL
  * @param {*} param 
- * @returns 
+ * @returns string
  */
 function getParameterValues(param) {
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -67,7 +67,7 @@ function getParameterValues(param) {
  * Checks if the URL params are valid
  * @param {*} team 
  * @param {*} index 
- * @returns 
+ * @returns boolean
  */
 function isValidParams(team,index) {
     if (team != "blue" && team != "green" && team != "red")
@@ -85,8 +85,11 @@ function loadRiddles() {
     .then((response) => response.json())
     .then((json) => {
         riddles = json
-        populateData()
-    });    
+        populateData()        
+    })
+    .catch(function() {
+        console.log("TREASURE: Could not load data JSON")
+    }); 
 }
 
 /**
@@ -97,8 +100,10 @@ function loadStrings() {
     .then((response) => response.json())
     .then((json) => {
         strings = json
-        console.log(strings)
-    });    
+    })
+    .catch(function() {
+        console.log("TREASURE: Could not load strings")
+    }); 
 }
 
 /**
@@ -131,13 +136,12 @@ function populateData() {
 
     el = findElement('riddleIndex');
     el.innerHTML = rindex
-
 }
 
 /**
  * Validates if the queried vector (size and angle) are correct
  * @param {*} form 
- * @returns 
+ * @returns boolean
  */
 function checkVector(form) {
     clearMsgs();
@@ -184,9 +188,9 @@ function checkVector(form) {
         el.innerHTML = strings.js.goodVector
         if (success > 0) {
             num = success-1
-            el.innerHTML += strings.js.vectorInfo //`<p>שימו לב שזהו הוקטור ה ${success} ברשימה מתוך ${rdl.vecSize.length}</p>`
+            el.innerHTML += strings.js.vectorInfo 
         }
-        el.innerHTML += strings.js.riddleLine //`<p class='vector' style="color:${data.color}"> (${rdl.vecSize[num]}m, ${rdl.vecAngle[num]}°)</p>`
+        el.innerHTML += strings.js.riddleLine 
     }
     return success;
 }
@@ -198,7 +202,7 @@ function checkVector(form) {
  * @param {*} jsonSize 
  * @param {*} jsonAngle 
  * @param {*} index 
- * @returns 
+ * @returns boolean
  */
 function checkAnswer(formSize, formAngle, jsonSize, jsonAngle, index) {
     if(Math.abs(formSize - jsonSize) > deltaSize || Math.abs(formAngle - jsonAngle) > deltaAngle) {
@@ -220,7 +224,7 @@ function clearMsgs() {
 /**
  * Generates the HTML of the riddle itself
  * @param {*} data 
- * @returns 
+ * @returns string
  */
 function generateRiddleHtml(data) {
     const rdl = data.riddles.filter((rdl) => (rdl.index == rindex) )[0]
