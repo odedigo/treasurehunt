@@ -257,6 +257,7 @@ async function updateTeamStatus() {
     else if (team == 'green') {
         _id = "65f7db26ce61ed8986782f65"
     }
+    console.log("updating status "+team+" "+rindex)
     const response = await fetch('https://eu-central-1.aws.data.mongodb-api.com/app/data-ffvzc/endpoint/data/v1/action/updateOne', {
         method: 'POST',
         headers: {
