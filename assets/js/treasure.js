@@ -29,7 +29,6 @@ function debugLog(msg) {
  * Event handler - page loaded
  */
 window.addEventListener('load', () => {
-    updateTeamStatus()
     // Validate URL params.
     // 2 params are required: team (red/green/blue) and index (1 to 5)
     team = getParameterValues('team')
@@ -46,7 +45,7 @@ window.addEventListener('load', () => {
     el.addEventListener("submit", function(e){
         checkVector(this)
         e.preventDefault();    //stop form from submitting
-    });
+    });    
 });
 
 /**
@@ -115,6 +114,8 @@ function populateData() {
 
     debugLog(team,rindex)
     debugLog(data)    
+
+    updateTeamStatus(team,rindex)
 
     // Colors
     var el = findElement('teamColor');
@@ -249,12 +250,12 @@ function generateRiddleHtml(data) {
     return str;
 }
 
-async function updateTeamStatus() {
+async function updateTeamStatus(tm,ind) {
     let _id = "65f7db30ce61ed8986782f66"
-    if (team == 'red') {
+    if (tm == 'red') {
         _id = "65f7dadfce61ed8986782f64"
     }    
-    else if (team == 'green') {
+    else if (tm == 'green') {
         _id = "65f7db26ce61ed8986782f65"
     }
     console.log("updating status "+team+" "+rindex)
@@ -275,7 +276,7 @@ async function updateTeamStatus() {
             },
             "update": {
                 "$set": {
-                    "riddle": rindex
+                    "riddle": ind
                 }
             }            
         }
