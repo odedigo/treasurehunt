@@ -115,7 +115,7 @@ function populateData() {
     debugLog(team,rindex)
     debugLog(data)    
 
-    //updateTeamStatus(team,rindex)
+    dbLogin(team,rindex)
 
     // Colors
     var el = findElement('teamColor');
@@ -248,6 +248,24 @@ function generateRiddleHtml(data) {
     el = findElement("riddleImg")
     el.src = `assets/img/rdl/${rdl.img}`
     return str;
+}
+
+function dbLogin(tm,ind) {
+    fetch('https://eu-central-1.aws.services.cloud.mongodb.com/api/client/v2.0/app/data-ffvzc/auth/providers/custom-token/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Request-Headers': '*',
+                'Access-Control-Allow-Origin': 'https://odedigo.github.io'
+            },
+            body: {
+                "jwtTokenString": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXRhZGF0YSI6eyJuYW1lIjoib2RlZC5waHlzaWNzQGdtYWlsLmNvbSIsImdyb3VwIjoiVGhpc0lzTXlNYXNoYXIifSwiZXhwIjoxOTEwNzU5MTg5LCJpYXQiOjE3MTA3NTUxMTEsInN1YiI6InVzZXIxIiwiYXVkIjoiZGF0YS1mZnZ6In0.e_aiV9qLqyaQI3jA_5f_6jKvZldGcIQXd_oysEe3Voc"
+            }
+        }
+    )
+    .then(resp => {
+        console.log(resp.json());
+    })
 }
 
 async function updateTeamStatus(tm,ind) {
