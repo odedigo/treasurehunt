@@ -29,6 +29,24 @@ const findElement = (el) => {
 }
 
 /**
+ * Replaces {0}, {1} inside string with given arguments
+ * First argument is the string
+ * @returns string
+ */
+function formatString() {
+  try {
+      let str = arguments[0]
+      for (let i = 1; i < arguments.length; i++) {
+          str = str.replace("{"+(i-1)+"}", arguments[i]);
+      }    
+      return str;
+  }
+  catch(err) {
+      return "N/A"
+  }
+}
+
+/**
  * Easy event listener function
  */
 const on = (type, el, listener, all = false) => {
