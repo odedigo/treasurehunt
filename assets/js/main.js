@@ -42,6 +42,7 @@ function formatString() {
       return str;
   }
   catch(err) {
+    console.log(err)
       return "N/A"
   }
 }
