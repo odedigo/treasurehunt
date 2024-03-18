@@ -190,9 +190,9 @@ function checkVector(form) {
         el.innerHTML = strings.js.goodVector
         if (success > 0) {
             num = success-1
-            el.innerHTML += strings.js.vectorInfo 
+            el.innerHTML += `<p>שימו לב שזהו הוקטור ה ${success} ברשימה מתוך ${rdl.vecSize.length}</p>`
         }
-        el.innerHTML += strings.js.riddleLine 
+        el.innerHTML += `<p class='vector' style='color:${data.color}'> (${rdl.vecSize[num]},${rdl.vecAngle[num]}°)</p>` 
     }
     return success;
 }
