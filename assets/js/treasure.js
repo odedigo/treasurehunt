@@ -196,7 +196,7 @@ function checkVector(form) {
     }
     return success;
 }
-
+ 
 /**
  * Checks if the angle and size in the form match those in the json for this riddle
  * @param {*} formSize 
