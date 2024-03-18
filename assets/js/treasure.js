@@ -266,6 +266,7 @@ async function updateTeamStatus(tm,ind) {
         'Accept': 'application/json',
         'Access-Control-Request-Headers': '*',
         'api-key': 'NmEFsBslI3f1pOIE7dcEX62esJwx2j9ME61TL2Z2KNAX8fDoEdLdWWIiqtJJfOg8',
+        'Access-Control-Allow-Origin': 'https://odedigo.github.io'
         },
         body: {            
             "collection":"gameStatus",
