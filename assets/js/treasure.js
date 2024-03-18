@@ -115,7 +115,7 @@ function populateData() {
     debugLog(team,rindex)
     debugLog(data)    
 
-    updateTeamStatus(team,rindex)
+    //updateTeamStatus(team,rindex)
 
     // Colors
     var el = findElement('teamColor');
@@ -258,6 +258,7 @@ async function updateTeamStatus(tm,ind) {
     else if (tm == 'green') {
         _id = "65f7db26ce61ed8986782f65"
     }
+    _token = "mashar"
     console.log("updating status "+team+" "+rindex)
     const response = await fetch('https://eu-central-1.aws.data.mongodb-api.com/app/data-ffvzc/endpoint/data/v1/action/updateOne', {
         method: 'POST',
@@ -265,8 +266,9 @@ async function updateTeamStatus(tm,ind) {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Request-Headers': '*',
-        'api-key': 'NmEFsBslI3f1pOIE7dcEX62esJwx2j9ME61TL2Z2KNAX8fDoEdLdWWIiqtJJfOg8',
-        'Access-Control-Allow-Origin': 'https://odedigo.github.io'
+        //'api-key': 'NmEFsBslI3f1pOIE7dcEX62esJwx2j9ME61TL2Z2KNAX8fDoEdLdWWIiqtJJfOg8',
+        //'Access-Control-Allow-Origin': 'https://odedigo.github.io',
+        'Authorization': 'Bearer '+_token
         },
         body: {            
             "collection":"gameStatus",
@@ -281,8 +283,13 @@ async function updateTeamStatus(tm,ind) {
                 }
             }            
         }
+    })
+    .catch(error => {
+        console.log("error updating team status...",error)
     });
-    const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
-    console.log(myJson)
+    if (response != null) {
+        const myJson = await response.json(); //extract JSON from the http response
+        // do something with myJson
+        console.log(myJson)
+    }
 }
