@@ -9,6 +9,7 @@
 
 // Globals
 let riddles = {}
+let strings = {}
 let team = ""
 let rindex = ""
 let debugMode = false
@@ -37,6 +38,7 @@ window.addEventListener('load', () => {
         return;
     }
     loadRiddles(); // Load the riddle data from Json file
+    loadStrings();
 
     // Register for form submission events (checking vector correctness)
     let el = findElement("checkForm")
@@ -84,6 +86,18 @@ function loadRiddles() {
     .then((json) => {
         riddles = json
         populateData()
+    });    
+}
+
+/**
+ * Loads the riddles' json
+ */
+function loadStrings() {
+    fetch("https://odedigo.github.io/treasurehunt/assets/lang/he.json")
+    .then((response) => response.json())
+    .then((json) => {
+        strings = json
+        console.log(strings)
     });    
 }
 
