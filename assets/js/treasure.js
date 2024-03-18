@@ -115,7 +115,7 @@ function populateData() {
     debugLog(team,rindex)
     debugLog(data)    
 
-    dbLogin(team,rindex)
+    //updateTeamStatus(team,rindex)
 
     // Colors
     var el = findElement('teamColor');
@@ -266,6 +266,7 @@ function dbLogin(tm,ind) {
     .then(resp => {
         console.log(resp.json());
     })
+    .catch(err => console.log(err))
 }
 
 async function updateTeamStatus(tm,ind) {
@@ -276,15 +277,14 @@ async function updateTeamStatus(tm,ind) {
     else if (tm == 'green') {
         _id = "65f7db26ce61ed8986782f65"
     }
-    _token = "mashar"
+    _token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiYWFzX2RldmljZV9pZCI6IjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCIsImJhYXNfZG9tYWluX2lkIjoiNjVmN2RjZTI3NzYxMTc4ODBiZjYwOGYzIiwiZXhwIjoxNzEwNzU3NDA5LCJpYXQiOjE3MTA3NTU2MDksImlzcyI6IjY1ZjgwZjE5NWRlNTg4ZWQzN2I3N2VjZCIsInN0aXRjaF9kZXZJZCI6IjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCIsInN0aXRjaF9kb21haW5JZCI6IjY1ZjdkY2UyNzc2MTE3ODgwYmY2MDhmMyIsInN1YiI6IjY1ZjgwZWRhYjk3MzA1ZTc1ZDljYzkyMCIsInR5cCI6ImFjY2VzcyJ9.YIEEn_ggFTU8kYSbvzR1wL7jrmcTON2pfCZYRQCCvFw"
     console.log("updating status "+team+" "+rindex)
     const response = await fetch('https://eu-central-1.aws.data.mongodb-api.com/app/data-ffvzc/endpoint/data/v1/action/updateOne', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Request-Headers': '*',
-        //'api-key': 'NmEFsBslI3f1pOIE7dcEX62esJwx2j9ME61TL2Z2KNAX8fDoEdLdWWIiqtJJfOg8',
+        //'Accept': 'application/json',
+        //'Access-Control-Request-Headers': '*',
         //'Access-Control-Allow-Origin': 'https://odedigo.github.io',
         'Authorization': 'Bearer '+_token
         },
