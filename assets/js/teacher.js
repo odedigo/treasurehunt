@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
     });    
 });
 
-function showZoom(img) {
+function showZoom(img) { 
     findElement("imgBig").src = img.src
     findElement("overlay").style.display = "inline"
     findElement("overlayContent").style.display = "inline"
