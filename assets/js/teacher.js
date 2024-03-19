@@ -1,3 +1,11 @@
+/**
+ * teacher.js
+ * 
+ * This file includes functions that display the teacher's view
+ * 
+ * Written by: Oded Cnaan
+ * Date: March 2024
+ */
 
 function generateRiddles() {
     generateTeamRiddle('blue')

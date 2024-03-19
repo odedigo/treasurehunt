@@ -1,4 +1,13 @@
 /**
+ * teacher.js
+ * 
+ * This file includes functions that display the student's view
+ * 
+ * Written by: Oded Cnaan
+ * Date: March 2024
+ */
+
+/**
  * Event handler - page loaded
  */
 window.addEventListener('load', () => {
