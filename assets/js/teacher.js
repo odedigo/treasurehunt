@@ -16,7 +16,7 @@ function generateTeamRiddle(team) {
                     </p>
                     <img src="{1}" class="testimonial-img" alt="">
                     <h3>חידה {2}</h3>
-                    <h4 style="direction:ltr;">{3}</h4>
+                    <h4>{3}</h4>
                     </div>
                 </div>`
 
