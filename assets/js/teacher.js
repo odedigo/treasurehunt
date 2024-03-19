@@ -68,7 +68,6 @@ window.addEventListener('load', () => {
 });
 
 function showZoom(img) {
-    console.log("zoom",img.src)
     findElement("imgBig").src = img.src
     findElement("overlay").style.display = "inline"
     findElement("overlayContent").style.display = "inline"
