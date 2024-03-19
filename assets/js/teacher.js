@@ -47,4 +47,29 @@ function calcVectors(vecSize, vecAngle) {
 window.addEventListener('load', () => {
     loadRiddles(generateRiddles); // Load the riddle data from Json file
     loadStrings();
+
+    let el = findElement("imgBig")
+    el.addEventListener("click", function(e){        
+        findElement("overlay").style.display = "none"
+        findElement("overlayContent").style.display = "none"
+    }); 
+    el = findElement("bluemap")
+    el.addEventListener("click", function(e){        
+        showZoom(this)
+    });    
+    el = findElement("greenmap")
+    el.addEventListener("click", function(e){        
+        showZoom(this)
+    });    
+    el = findElement("redmap")
+    el.addEventListener("click", function(e){        
+        showZoom(this)
+    });    
 });
+
+function showZoom(img) {
+    console.log("zoom",img.src)
+    findElement("imgBig").src = img.src
+    findElement("overlay").style.display = "inline"
+    findElement("overlayContent").style.display = "inline"
+}
