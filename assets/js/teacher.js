@@ -7,12 +7,19 @@
  * Date: March 2024
  */
 
+/**
+ * Called on load to generate the data
+ */
 function generateRiddles() {
     generateTeamRiddle('blue')
     generateTeamRiddle('green')
     generateTeamRiddle('red')
 }
 
+/**
+ * Generates riddle text
+ * @param {*} team 
+ */
 function generateTeamRiddle(team) {
     var innerHtml = ""
     var html = `<div class="swiper-slide">
@@ -39,6 +46,12 @@ function generateTeamRiddle(team) {
     el.innerHTML  = innerHtml
 }
 
+/**
+ * Generates a string with all response vectors
+ * @param {*} vecSize 
+ * @param {*} vecAngle 
+ * @returns 
+ */
 function calcVectors(vecSize, vecAngle) {
     var result = ""
     for (var i=0; i < vecSize.length ; i++) {
@@ -47,6 +60,17 @@ function calcVectors(vecSize, vecAngle) {
             result += "<br/>"
     }
     return result
+}
+
+
+/**
+ * Displays the enlatged image
+ * @param {*} img 
+ */
+function showZoom(img) { 
+    findElement("imgBig").src = img.src
+    findElement("overlay").style.display = "inline"
+    findElement("overlayContent").style.display = "inline"
 }
 
 /**
@@ -74,9 +98,3 @@ window.addEventListener('load', () => {
         showZoom(this)
     });    
 });
-
-function showZoom(img) { 
-    findElement("imgBig").src = img.src
-    findElement("overlay").style.display = "inline"
-    findElement("overlayContent").style.display = "inline"
-}
