@@ -15,7 +15,7 @@ let rindex = ""
 let debugMode = false 
 let deltaAngle = 5;
 let deltaSize = 5;
-let vectorJson = "vectors.json"
+let vectorJson = "vectors_rasha.json"
 
 /**
  * Prints data only if in debug mode
