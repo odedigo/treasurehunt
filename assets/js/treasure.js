@@ -15,6 +15,7 @@ let rindex = ""
 let debugMode = false
 let deltaAngle = 5;
 let deltaSize = 5;
+let vectorJson = "vectors_rasha.json"
 
 /**
  * Prints data only if in debug mode
@@ -59,7 +60,7 @@ function isValidParams(team,index) {
  * Loads the riddles' json
  */
 function loadRiddles(callbk) {
-    fetch("https://odedigo.github.io/treasurehunt/assets/data/vectors.json")
+    fetch("https://odedigo.github.io/treasurehunt/assets/data/"+vectorJson)
     .then((response) => response.json())
     .then((json) => {
         riddles = json
